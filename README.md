@@ -1,4 +1,4 @@
-# flutter_riverpodd_sample
+# flutter_riverpod_sample
 
 flutter_riverpodを使ったカウンターアプリのサンプルです。
 
