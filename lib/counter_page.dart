@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:riverpods_sample/state/color.dart';
-import 'package:riverpods_sample/state/count.dart';
+import 'package:riverpods_sample/state/counter.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CountPage extends ConsumerWidget {
+class CounterPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
@@ -17,7 +17,7 @@ class CountPage extends ConsumerWidget {
       ),
       body: _Body(),
       floatingActionButton: FloatingActionButton(
-        onPressed: ref.read(countProvider.notifier).incrementCount,
+        onPressed: ref.read(counterProvider.notifier).incrementCounter,
         child: Icon(Icons.add),
       ),
     );
@@ -29,7 +29,7 @@ class _Body extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final count = ref.watch(countProvider);
+    final count = ref.watch(counterProvider);
     final color = ref.watch(colorProvider);
     return Center(
       child: Text(
