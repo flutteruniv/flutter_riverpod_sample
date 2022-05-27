@@ -1,38 +1,43 @@
 import 'package:flutter/material.dart';
-import 'package:riverpods_sample/color_model.dart';
-import 'package:riverpods_sample/count_model.dart';
+import 'package:riverpods_sample/state/color.dart';
+import 'package:riverpods_sample/state/count.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CountPage extends StatelessWidget {
+class CountPage extends ConsumerWidget {
   @override
-  Widget build(BuildContext context) {
-    final colorModel = context.read(colorProvider);
-    final countModel = context.read(counterProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         actions: [
           IconButton(
-            onPressed: colorModel.changeColor,
+            onPressed: ref.read(colorProvider.notifier).changeColor,
             icon: Icon(Icons.update),
           )
         ],
       ),
-      body: Center(
-        child: Consumer(builder: (context, watch, child) {
-          final count = watch(counterProvider).counter;
-          final color = watch(colorProvider).currentColor;
-          return Text(
-            '$count',
-            style: TextStyle(
-              fontSize: 80,
-              color: color,
-            ),
-          );
-        }),
-      ),
+      body: _Body(),
       floatingActionButton: FloatingActionButton(
-        onPressed: countModel.incrementCounter,
+        onPressed: ref.read(countProvider.notifier).incrementCount,
         child: Icon(Icons.add),
+      ),
+    );
+  }
+}
+
+class _Body extends ConsumerWidget {
+  const _Body();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final count = ref.watch(countProvider);
+    final color = ref.watch(colorProvider);
+    return Center(
+      child: Text(
+        '$count',
+        style: TextStyle(
+          fontSize: 80,
+          color: color,
+        ),
       ),
     );
   }
