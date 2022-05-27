@@ -29,11 +29,11 @@ class _Body extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final count = ref.watch(counterProvider);
+    final counter = ref.watch(counterProvider);
     final color = ref.watch(colorProvider);
     return Center(
       child: Text(
-        '$count',
+        '$counter',
         style: TextStyle(
           fontSize: 80,
           color: color,
