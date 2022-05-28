@@ -44,3 +44,9 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# 人によってパスが変わるため無視する
+.fvm/flutter_sdk
+
+# 人によって設定が変わるため無視する
+.vscode/settings.json
