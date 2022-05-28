@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:riverpods_sample/state/color.dart';
-import 'package:riverpods_sample/state/counter.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'state/color.dart';
+import 'state/counter.dart';
+
 class CounterPage extends ConsumerWidget {
+  const CounterPage({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
@@ -13,18 +16,18 @@ class CounterPage extends ConsumerWidget {
             // 「カラー状態のコントローラー」を WidgetRef 経由で取得して
             // カラー変更メソッドを実行する
             onPressed: ref.read(colorProvider.notifier).changeColor,
-            icon: Icon(Icons.update),
+            icon: const Icon(Icons.update),
           )
         ],
       ),
-      body: Center(
+      body: const Center(
         child: _ColorfulCounterText(),
       ),
       floatingActionButton: FloatingActionButton(
         // 「カウント状態のコントローラー」を WidgetRef 経由で取得して
         // カウントをインクリメントするメソッドを実行する
         onPressed: ref.read(counterProvider.notifier).incrementCounter,
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }
