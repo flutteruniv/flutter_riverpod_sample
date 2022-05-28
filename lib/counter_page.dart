@@ -15,7 +15,9 @@ class CounterPage extends ConsumerWidget {
           )
         ],
       ),
-      body: _Body(),
+      body: Center(
+        child: _ColorfulCounterText(),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: ref.read(counterProvider.notifier).incrementCounter,
         child: Icon(Icons.add),
@@ -24,20 +26,29 @@ class CounterPage extends ConsumerWidget {
   }
 }
 
-class _Body extends ConsumerWidget {
-  const _Body();
+/// カウンター状態とカラー状態を監視して更新するテキスト
+///
+/// Stateを末端に追いやるとサブツリーがその末端以下となって小さくなるのでその分リビルドが
+/// 軽くなります。例えば、Widgetが時間とともに更新される時計を持っていたとして、その時計
+/// をルートで保持すると時計の更新のたびにページ全体が無駄にリビルドされることになります。
+/// その代わりに時計のWidgetを別途作って末端に置いて自律的に更新させるようにすると良いです。
+/// 参考サイト: https://medium.com/flutter-jp/state-performance-7a5f67d62edd#e7ec
+///
+/// Widget クラスとして切り出すのではなく [Consumer] を使ってリビルドの範囲を狭くする
+/// 方法もあります。
+/// 参考サイト: https://zenn.dev/kiiimii/articles/96d5dc181228b2
+class _ColorfulCounterText extends ConsumerWidget {
+  const _ColorfulCounterText();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final counter = ref.watch(counterProvider);
     final color = ref.watch(colorProvider);
-    return Center(
-      child: Text(
-        '$counter',
-        style: TextStyle(
-          fontSize: 80,
-          color: color,
-        ),
+    return Text(
+      '$counter',
+      style: TextStyle(
+        fontSize: 80,
+        color: color,
       ),
     );
   }
