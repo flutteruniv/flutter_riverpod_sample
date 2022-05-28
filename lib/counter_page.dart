@@ -10,6 +10,8 @@ class CounterPage extends ConsumerWidget {
       appBar: AppBar(
         actions: [
           IconButton(
+            // 「カラー状態のコントローラー」を WidgetRef 経由で取得して
+            // カラー変更メソッドを実行する
             onPressed: ref.read(colorProvider.notifier).changeColor,
             icon: Icon(Icons.update),
           )
@@ -19,6 +21,8 @@ class CounterPage extends ConsumerWidget {
         child: _ColorfulCounterText(),
       ),
       floatingActionButton: FloatingActionButton(
+        // 「カウント状態のコントローラー」を WidgetRef 経由で取得して
+        // カウントをインクリメントするメソッドを実行する
         onPressed: ref.read(counterProvider.notifier).incrementCounter,
         child: Icon(Icons.add),
       ),
@@ -42,6 +46,8 @@ class _ColorfulCounterText extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // プロバイダーを `ref.watch` することで、カウント状態とカラー状態が
+    // 更新されたら `build()` が再実行されて表示が更新されます
     final counter = ref.watch(counterProvider);
     final color = ref.watch(colorProvider);
     return Text(
