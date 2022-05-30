@@ -15,7 +15,7 @@ class CounterPage extends ConsumerWidget {
           IconButton(
             // 「カラー状態のコントローラー」を WidgetRef 経由で取得して
             // カラー変更メソッドを実行する
-            onPressed: ref.read(colorProvider.notifier).changeColor,
+            onPressed: () => ref.read(colorProvider.notifier).changeColor(),
             icon: const Icon(Icons.update),
           )
         ],
@@ -26,7 +26,7 @@ class CounterPage extends ConsumerWidget {
       floatingActionButton: FloatingActionButton(
         // 「カウント状態のコントローラー」を WidgetRef 経由で取得して
         // カウントをインクリメントするメソッドを実行する
-        onPressed: ref.read(counterProvider.notifier).incrementCounter,
+        onPressed: () => ref.read(counterProvider.notifier).incrementCounter(),
         child: const Icon(Icons.add),
       ),
     );
