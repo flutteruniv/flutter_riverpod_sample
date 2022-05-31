@@ -20,11 +20,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 /// final counter = ref.watch(counterProvider);
 /// ```
 ///
-/// カウント状態を更新（インクリメント）したいときは次のように書きます。
+/// ElevatedButton等のonPressedの中でカウント状態を更新（インクリメント）したいときは、
+/// 次のように書きます。
 /// ```
-/// onPressed: () {
 ///   ref.read(counterProvider.notifier).update((state) => state + 1);
-/// },
+/// ```
+/// 今回のCountNotifierのように、
+/// 状態を更新(インクリメント)するメソッド(incrementCounter)を実装している場合は、
+/// 次のように書くことで状態の更新をメソッドを用いて行うこともできます。
+/// ```
+///   ref.read(counterProvider.notifier).incrementCounter;
 /// ```
 /// 参考サイト: https://riverpod.dev/docs/providers/state_provider/#how-to-update-the-state-based-on-the-previous-value-without-reading-the-provider-twice
 final counterProvider = StateNotifierProvider.autoDispose<CounterNotifier, int>(
